@@ -2,8 +2,11 @@ import Image from "next/image";
 import Link from "next/link";
 import React from "react";
 import sitelogo from "@/Ass/icon.png";
-import { SignIn, SignedIn, UserButton } from "@clerk/nextjs";
-import LightButton from "@/components/shared/LightButton";
+import { SignedIn, UserButton } from "@clerk/nextjs";
+import { ModeToggle } from "../ModeToggle/ModeToggle";
+
+
+
 
 const NavBar = () => {
   return (
@@ -14,21 +17,22 @@ const NavBar = () => {
           Grow <span className="text-[#FF7000]">Dev</span>
         </p>
       </Link>
-      <LightButton/>
+      
       <div className="flex items-center justify-between gap-5">
-        
+       
+        <ModeToggle/>
         <SignedIn>
-        <UserButton afterSignOutUrl="/"
-        appearance={{
-            elements:{
-                avatarBox:' h-10 w-10',
-
-            },
-            variables:{
-                colorPrimary:'#ff7000'
-            }
-        }}
-        />
+          <UserButton
+            afterSignOutUrl="/"
+            appearance={{
+              elements: {
+                avatarBox: " h-10 w-10",
+              },
+              variables: {
+                colorPrimary: "#ff7000",
+              },
+            }}
+          />
         </SignedIn>
         {/*  */}
       </div>
