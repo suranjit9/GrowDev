@@ -2,7 +2,8 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
 import { ClerkProvider } from "@clerk/nextjs";
-import { ThemeProvider } from "@/context/themeProvider";
+import { ThemeProvider } from "@/context/lightSwath";
+// import { ThemeProvider } from "@/context/themeProvider";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -23,7 +24,15 @@ export default function RootLayout({
     <html lang="en">
       <body className={inter.className}>
         <ClerkProvider>
-          <ThemeProvider>{children}</ThemeProvider>
+          {/* <ThemeProvider>{children}</ThemeProvider> */}
+          <ThemeProvider
+            attribute="class"
+            defaultTheme="system"
+            enableSystem
+            disableTransitionOnChange
+          >
+            {children}
+          </ThemeProvider>
         </ClerkProvider>
       </body>
     </html>
