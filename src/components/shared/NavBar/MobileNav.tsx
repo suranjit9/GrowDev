@@ -13,8 +13,7 @@ import { Button } from "@/components/ui/button";
 import { SignedOut } from "@clerk/nextjs";
 import { sidebarLinks } from "@/constants/sidebarLink";
 import { usePathname } from "next/navigation";
-// import NavContent from "./NavContent";
-// import { SidebarLink } from "@/constants/sidebarLink";
+
 
 const NavContent = () => {
   const pathname = usePathname();
