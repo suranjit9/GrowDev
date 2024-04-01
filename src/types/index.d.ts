@@ -1,9 +1,10 @@
 import { BADGE_CRITERIA } from "@/types";
-export interface SidebarLink {
-    imgURL: string;
-    route: string;
-    label: string;
-   }
+import { SidebarLink } from "@/types";
+// export interface SidebarLink {
+//     imgURL: string;
+//     route: string;
+//     label: string;
+//    }
    export interface Job {
     id?: string;
     employer_name?: string;
