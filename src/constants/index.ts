@@ -1,27 +1,28 @@
-
-export const sidebarLinks: sidebarLinks[] = [
+import { SidebarLink } from "@/types/index";
+type SidebarLinks = SidebarLink[];
+export const sidebarLinks = [
     {
-      imgURL: "/assets/icons/home.svg",
+      imgURL: "../assets/Vectorhome.svg",
       route: "/",
       label: "Home",
     },
     {
-      imgURL: "/assets/icons/users.svg",
+      imgURL: "../assets/Contentcommunities.svg",
       route: "/community",
       label: "Community",
     },
     {
-      imgURL: "/assets/icons/star.svg",
+      imgURL: "../assets/List Manu.svg",
       route: "/collection",
       label: "Collections",
     },
     {
-      imgURL: "/assets/icons/suitcase.svg",
+      imgURL: "../assets/Contentjob.svg",
       route: "/jobs",
       label: "Find Jobs",
     },
     {
-      imgURL: "/assets/icons/tag.svg",
+      imgURL: "../assets/Content.svg",
       route: "/tags",
       label: "Tags",
     },
@@ -31,7 +32,7 @@ export const sidebarLinks: sidebarLinks[] = [
       label: "Profile",
     },
     {
-      imgURL: "/assets/icons/question.svg",
+      imgURL: "../assets/Contentask.svg",
       route: "/ask-question",
       label: "Ask a question",
     },
