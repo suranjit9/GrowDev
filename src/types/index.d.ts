@@ -5,6 +5,11 @@ import { SidebarLink } from "@/types";
 //     route: string;
 //     label: string;
 //    }
+export interface hotQusetions {
+    _id: number;
+    title: string;
+    
+   }
    export interface Job {
     id?: string;
     employer_name?: string;

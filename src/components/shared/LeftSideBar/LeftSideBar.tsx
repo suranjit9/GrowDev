@@ -10,8 +10,8 @@ import sitelogo from "@/assets/icon.png";
 const LeftSideBar = () => {
   const pathname = usePathname();
   return (
-    <section className=" left-0 bg-[#151821] top-0 flex flex-col justify-between h-screen overflow-y-auto border p-6 pt-11 lg:w-[266px] max-sm:hidden">
-      <div className="flex flex-1 flex-col pt-11 gap-6">
+    <section className=" left-0 dark:bg-[#151821] top-0 flex flex-col justify-between h-screen overflow-y-auto pt-20 lg:w-[266px] max-sm:hidden">
+      <div className="flex flex-1 flex-col px-2 py-2 gap-6">
         {sidebarLinks.map((item) => {
           const isactive =
             (pathname.includes(item.route) && item.route.length > 1) ||
@@ -31,6 +31,7 @@ const LeftSideBar = () => {
                 alt={item.label}
                 width={20}
                 height={20}
+                loading="lazy"
               />
 
               <p>{item.label}</p>
