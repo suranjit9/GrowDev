@@ -17,11 +17,11 @@ const LocalSearch = ({
 }:CoustomIputProps) => {
   return (
     
-    <div className={`relative w-full flex min-h-[56px]  items-center gap-4 rounded-sm px-4 ${otherClasses}`}>
+    <div className={`relative w-full flex min-h-[56px] items-center rounded-sm px-4 ${otherClasses}`}>
          <div className='flex text-xl grow'>
             <CiSearch className='absolute mt-2 ml-3' />
             <Input 
-            className='pl-8 w-full dark:border-white'
+            className='pl-8 w-full dark:border-white '
             placeholder={placeholder}
             type='text'
             value=""

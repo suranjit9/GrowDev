@@ -10,6 +10,7 @@ interface Props {
 import {
   Select,
   SelectContent,
+  SelectGroup,
   SelectItem,
   SelectTrigger,
   SelectValue,
@@ -17,15 +18,23 @@ import {
 
 const Filter = ({ filters, otherClass, contnerClassName }: Props) => {
   return (
-    <div className={`relative ${contnerClassName}`}>
+    <div className={`relative ${contnerClassName} items-center px-4`}>
       <Select>
-        <SelectTrigger className="w-[180px]">
-          <SelectValue placeholder="Theme" />
+        <SelectTrigger
+          className={`${otherClass} rounded-sm  dark:border-white `}
+        >
+          <div className="line-clamp-1">
+            <SelectValue placeholder="Select a Filter" />
+          </div>
         </SelectTrigger>
         <SelectContent>
-          <SelectItem value="light">Light</SelectItem>
-          <SelectItem value="dark">Dark</SelectItem>
-          <SelectItem value="system">System</SelectItem>
+          <SelectGroup>
+            {filters.map((item)=>{
+                return(
+                    <SelectItem key={item.value} value={item.value}>{item.name}</SelectItem>
+                )
+            })}
+          </SelectGroup>
         </SelectContent>
       </Select>
     </div>
