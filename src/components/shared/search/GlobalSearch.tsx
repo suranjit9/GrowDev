@@ -11,6 +11,7 @@ const GlobalSearch = () => {
             placeholder='Search.....'
             type='text'
             value=""
+            // onChange={()=>{}}
             />
 
             </div>
