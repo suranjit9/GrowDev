@@ -3,7 +3,7 @@ import { useTheme } from 'next-themes';
 import Image from 'next/image';
 import React from 'react';
 import noresult from '@/assets/llustration.png';
-import noresult1 from '@/assets/llustrationlight.png';
+import noresult1 from '@/assets/llustrationlight (1).png';
 import { Button } from '@/components/ui/button';
 import Link from 'next/link';
 interface props {

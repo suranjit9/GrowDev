@@ -1,3 +1,4 @@
+import QuestionCard from "@/components/Cards/QuestionCard";
 import HomeFilter from "@/components/Home/HomeFilter";
 import Filter from "@/components/shared/Filter/Filter";
 import NoResult from "@/components/shared/NoResult/NoResult";
@@ -8,44 +9,71 @@ import { UserButton } from "@clerk/nextjs";
 import Link from "next/link";
 
 const questions = [
-  // {
-  //   _id: 1,
-  //   title: "hello title",
-  //   tags: [
-  //     {
-  //       _id: 1,
-  //       name: "next js",
-  //     },
-  //     {
-  //       _id: 2,
-  //       name: "reaxt js",
-  //     },
-  //   ],
-  //   author: "roki vai",
-  //   upvotes: 10,
-  //   view: 10099,
-  //   answers: 2,
-  //   createdAt: "",
-  // },
-  // {
-  //   _id: 2,
-  //   title: "hello titlgggggggge",
-  //   tags: [
-  //     {
-  //       _id: 1,
-  //       name: "next js",
-  //     },
-  //     {
-  //       _id: 2,
-  //       name: "reaxt js",
-  //     },
-  //   ],
-  //   author: "roki vai",
-  //   upvotes: 10,
-  //   view: 10099,
-  //   answers: 2,
-  //   createdAt: "",
-  // },
+  {
+    _id: "1",
+    title: "Sample Title jhfsa aijojgia iagjioaga nnagina ninaoig a",
+    tags: [
+        {
+            _id: "tag1",
+            name: "Tag 1"
+        },
+        {
+            _id: "tag2",
+            name: "Tag 2"
+        }
+    ],
+    author: {
+        _id: "author1",
+        name: "John Doe",
+        image: "author_image.jpg"
+    },
+    upvotes: 10,
+    view: 100,
+    answers: [
+        {
+            answer_id: "answer1",
+            answer_text: "Sample answer 1"
+        },
+        {
+            answer_id: "answer2",
+            answer_text: "Sample answer 2"
+        }
+    ],
+    createdAt:new Date ("2024-04-02T12:00:00Z")
+},
+  {
+    _id: "1e",
+    title: "Sample Title",
+    tags: [
+        {
+            _id: "tag1e",
+            name: "Tag 1"
+        },
+        {
+            _id: "tag2e",
+            name: "Tag 2"
+        }
+    ],
+    author: {
+        _id: "author11",
+        name: "John Doe",
+        image: "author_image.jpg"
+    },
+    upvotes: 110,
+    view: 1020,
+    answers: [
+        {
+            answer_id: "answer11",
+            answer_text: "Sample answer 1"
+        },
+        {
+            answer_id: "answer21",
+            answer_text: "Sample answer 2"
+        }
+    ],
+    createdAt:new Date ("2024-04-02T12:00:00Z")
+}
+
 ];
 
 export default function Home() {
@@ -77,7 +105,17 @@ export default function Home() {
       <div className="mt-8 flex flex-col gap-4">
         {questions.length > 0
           ? questions.map((qus) => {
-              return <h1 key={qus._id}>{qus.title}</h1>;
+              return <QuestionCard 
+              key={qus._id}
+              _id={qus._id}
+              title={qus.title}
+              tags={qus.tags}
+              author={qus.author}
+              upvotes={qus.upvotes}
+              view={qus.view}
+              answers={qus.answers}
+              createdAt={qus.createdAt}
+              />
             })
           : <NoResult
           title="There’s no question to show"

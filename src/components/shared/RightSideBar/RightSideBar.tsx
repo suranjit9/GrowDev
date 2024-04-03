@@ -4,50 +4,50 @@ import RenderTags from "../RenderTags/RenderTags";
 
 const hotQusetions = [
   {
-    _id: 1,
+    _id: '1',
     title:
       "How to grow your Skile in webDevlopment?How to grow your Skile in webDevlopment?",
   },
   {
-    _id: 2,
+    _id: '2',
     title: "How to grow your Skile in webDevlopment?",
   },
   {
-    _id: 13,
+    _id: '13',
     title: "How to grow your Skile in webDevlopment?",
   },
   {
-    _id: 139,
+    _id: '139',
     title: "How to grow your Skile in webDevlopment?",
   },
   {
-    _id: 14,
+    _id: '14',
     title: "How to grow your Skile in webDevlopment?",
   },
 ];
 const populerTag =[
   {
-    _id:1,
+    _id:'1',
     name:'Js',
     totalQustion:5
   },
   {
-    _id:2,
+    _id:'2',
     name:'React Js',
     totalQustion:4
   },
   {
-    _id:13,
+    _id:'13',
     name:'Next Js',
     totalQustion:50
   },
   {
-    _id:14,
+    _id:'14',
     name:'Css',
     totalQustion:5
   },
   {
-    _id:15,
+    _id:'15',
     name:'SadSdn ui',
     totalQustion:50
   },
