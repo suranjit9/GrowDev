@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Link from "next/link";
 
 interface props{
     imgurl:string;
@@ -9,16 +10,32 @@ interface props{
     isAuthor?:boolean;
     href?:string;
 }
+
 const Metric = ({imgurl, alt, value, title, textStyle, href, isAuthor}: props) => {
-    return (
-        <div className="flex flex-wrap justify-center items-center gap-2">
+    const metricContedt = (
+        <>
+        
            <Image src={imgurl} alt={alt} width={16} height={16}
            className={`object-contain ${href ? 'rounded-full':''}`}
            />
             <p className={`${textStyle} flex items-center gap-1}`}>
                 {value}
-                {title}
+                <span className={`text-base line-clamp-1 ${isAuthor ?'max-sm:hidden':''}`}>{title}</span>
+                
             </p>
+        
+        </>
+    )
+    if(href){
+        return (
+            <Link className="flex items-center justify-center" href={href}>
+                {metricContedt}
+            </Link>
+        );
+    }
+    return (
+        <div className="flex flex-wrap justify-center items-center gap-1">
+        {metricContedt}
         </div>
     );
 };

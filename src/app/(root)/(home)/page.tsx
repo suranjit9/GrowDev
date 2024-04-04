@@ -27,8 +27,8 @@ const questions = [
         name: "John Doe",
         image: "author_image.jpg"
     },
-    upvotes: 10,
-    view: 100,
+    upvotes: 100000000,
+    view: 10000,
     answers: [
         {
             answer_id: "answer1",
