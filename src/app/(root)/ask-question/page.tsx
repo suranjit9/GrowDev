@@ -1,4 +1,5 @@
-import Question from '@/components/froms/Question';
+// import Question from '@/components/froms/Question';
+import Question2 from '@/components/froms/Question2';
 import React from 'react';
 
 const askquestion = () => {
@@ -6,7 +7,8 @@ const askquestion = () => {
         <div className='mx-auto w-full max-w-[90%]'>
            <h1 className="text-xl font-bold">Ask a Question</h1>
            <div className="mt-5">
-            <Question/>
+            <Question2/>
+            {/* <Question/> */}
            </div>
         </div>
     );

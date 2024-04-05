@@ -17,14 +17,26 @@ import {
   FormMessage,
 } from "@/components/ui/form"
 import { Input } from "@/components/ui/input"
-import { QuestionSchema } from "@/lib/validations"
+// import { QuestionSchema } from "@/lib/validations"
 import { Badge } from '../ui/badge';
+import { createQuestion } from '@/lib/action/question.action';
 
 const type:any = 'create';
+const QuestionSchema = z.object({
+  title: z.string().min(5).max(130),
+  explanation: z.string().min(5).max(5000),
+  tags:z.array(z.string().min(15).max(15)).min(1).max(3),
+})
 
 const Question = () => {
     const editorRef = useRef(null);
     const [isSubmiting, setSubmiting] = React.useState(false)
+
+    const handleTagRemove = (tag:string, field:any)=>{
+      const newTags = field.value.filter((t:string) => t !== tag);
+      form.setValue("tags", newTags);
+      console.log(field)
+    }
     const hendleInputKeyDown = (e:React.KeyboardEvent<HTMLInputElement>, field:any) =>{
         if (e.key === "Enter" && field.name === 'tags') {
             e.preventDefault()
@@ -39,11 +51,11 @@ const Question = () => {
               }
               if (!field.value.includes(tagValue as never)) {
                 form.setValue("tags", [...field.value, tagValue]);
-                tagInput.value = "";
+                tagInput.value = ""
                 form.clearErrors("tags");
               }
             }else{
-              form.trigger()
+              form.trigger();
             }
         }
     }
@@ -58,14 +70,16 @@ const Question = () => {
       })
      
       // 2. Define a submit handler.
-      function onSubmit(values: z.infer<typeof QuestionSchema>) {
+     async function onSubmit(values: z.infer<typeof QuestionSchema>) {
         setSubmiting(true)
 
         try {
           // make an API call -> create a question
             console.log(values)
+            createQuestion(values)
         } catch (error) {
           setSubmiting(false)
+          console.log(error)
         }
         // Do something with the form values.
         // ✅ This will be type-safe and validated.
@@ -149,21 +163,21 @@ const Question = () => {
                     className="no-focus text-base min-h-[56px] border"
                     placeholder="tags"
                     onKeyDown={(e) => hendleInputKeyDown(e, field)}/>
-                    {field.value &&field.value.length > 0 ? (
+                    {field.value.length > 0 && (
                         <div className="flex flex-wrap gap-2 mt-2">
-                          {field.value.map((tag, index) => {
+                          {field.value.map((tag:any) => {
                               return (
                                 <Badge
                                 className='text-base text-white bg-slate-700 dark:bg-slate-500 border-none flex items-center justify-center gap-2 rounded-md px-4 py-2 capitalize mt-2'
-                                key={index}>
+                                key={tag} onClick={()=> handleTagRemove(tag, field)}>
                                   {tag}
-                                  <RiCloseLine  onClick={() => field.onChange(field.value.filter((_, i) => i !== index))}/>
+                                  <RiCloseLine />
                                 </Badge>
                               )
                             })
                           }
                           </div>
-                      ): ''
+                      )
                     }
                    </>
                     
@@ -174,7 +188,7 @@ const Question = () => {
                   <FormMessage className="text-sm text-red-500" />
                 </FormItem>
               )}
-            />
+            /> 
          
             <Button className=' w-fit bg-yellow text-white' disabled={isSubmiting} type="submit">
 
@@ -187,6 +201,7 @@ const Question = () => {
               )
               }
             </Button>
+            <Button type="submit">Submit</Button>
           </form>
         </Form>
        </>
