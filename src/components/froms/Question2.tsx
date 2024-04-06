@@ -19,13 +19,21 @@ import {
 import { Input } from "@/components/ui/input"
 import { Badge } from '../ui/badge';
 import { createQuestion } from '@/lib/action/question.action';
+import { usePathname, useRouter } from 'next/navigation';
+
+// import { QuestionSchema } from '@/lib/validations';
 
 const type = 'create';
+interface props{
+    mongoUserid:string;
+}
 
-const Question2 = () => {
+const Question2 = ({mongoUserid}:props) => {
+    console.log(mongoUserid)
     const editorRef = useRef(null);
     const [isSubmitting, setSubmitting] = React.useState(false)
-
+    const router = useRouter();
+    const pathname = usePathname();
     const QuestionSchema = z.object({
         title: z.string().min(5).max(130),
         explanation: z.string().min(5).max(5000),
@@ -75,7 +83,14 @@ const Question2 = () => {
         setSubmitting(true);
         try {
             console.log(values);
-            await createQuestion(values);
+            await createQuestion({
+                title: values.title,
+                explanation: values.explanation,
+                tags: values.tags,
+                author: mongoUserid,
+            });
+            router.push('/')
+            
         } catch (error) {
             console.error(error);
         }
@@ -84,7 +99,7 @@ const Question2 = () => {
 
     return (
         <Form {...form}>
-            <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8 w-full flex flex-col">
+            <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8 w-full flex flex-col mb-8">
                 <FormField
                     control={form.control}
                     name="title"
@@ -93,7 +108,7 @@ const Question2 = () => {
                             <FormLabel className="text-base">Question Title</FormLabel>
                             <FormControl className="mt-3.5">
                                 <Input 
-                                    className="no-focus text-base min-h-[56px] border"
+                                    className="no-focus text-base min-h-[56px] bg-[#F4F6F8] dark:bg-[#151821]"
                                     placeholder="Title" {...field} 
                                 />
                             </FormControl>
@@ -111,16 +126,21 @@ const Question2 = () => {
                     render={({ field }) => (
                         <FormItem className="flex w-full flex-col">
                             <FormLabel className="text-base">Details Explanation of your Problem</FormLabel>
-                            <FormControl className="mt-3.5">
+                            <FormControl className="mt-3.5  ">
                                 {/* Editor */}
+                                
                                 <Editor
                                     apiKey='y5hf6nspgt19boly9h0cy9a05lw3cj5aj3r2ew7wo9fc0rtt'
                                     onInit={(evt, editor) => {
+                                        // @ts-ignore
+
                                         editorRef.current = editor;
                                     }}
+                                    
                                     onBlur={field.onBlur}
                                     onEditorChange={(content) => field.onChange(content)}
-                                    initialValue="<p>This is the initial content of the editor.</p>"
+                                    initialValue=""
+                                    
                                     init={{
                                         height: 350,
                                         menubar: true,
@@ -133,8 +153,9 @@ const Question2 = () => {
                                             'codesample | bold italic forecolor | alignleft aligncenter ' +
                                             'alignright alignjustify | bullist numlist outdent indent | ' +
                                             'removeformat ',
-                                        content_style: 'body { font-family:Inter,Helvetica,Arial,sans-serif; font-size:16px }'
+                                        content_style: 'body { font-family:Inter,Helvetica,Arial,sans-serif; font-size:16px;  }'
                                     }}
+                                    
                                 />
                                 {/* Editor */}
                             </FormControl>
@@ -155,7 +176,7 @@ const Question2 = () => {
                             <FormControl className="mt-3.5">
                                 <>
                                     <Input 
-                                        className="no-focus text-base min-h-[56px] border"
+                                        className="no-focus text-base min-h-[56px]  bg-[#F4F6F8] dark:bg-[#151821]"
                                         placeholder="Tags"
                                         onKeyDown={(e) => handleInputKeyDown(e, field)}
                                     />
@@ -182,8 +203,8 @@ const Question2 = () => {
                         </FormItem>
                     )}
                 /> 
-                <Button className='w-fit bg-yellow text-white' disabled={isSubmitting} type="submit">
-                    {isSubmitting ? 'Submitting...' : 'Submit'}
+                <Button className='min-h-[46px] w-fit px-4 py-3 bg-gradient-to-r from-[#FF7000] to-[#E2985E] dark:text-white' disabled={isSubmitting} type="submit">
+                    {isSubmitting ? 'Submitting...' : 'Ask a Question'}
                 </Button>
             </form>
         </Form>

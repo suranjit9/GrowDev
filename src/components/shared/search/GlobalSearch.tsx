@@ -10,7 +10,7 @@ const GlobalSearch = () => {
             className='pl-8 w-full dark:border-white'
             placeholder='Search.....'
             type='text'
-            value=""
+            // value=""
             // onChange={()=>{}}
             />
 

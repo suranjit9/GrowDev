@@ -24,7 +24,7 @@ const LocalSearch = ({
             className='pl-8 w-full dark:border-white '
             placeholder={placeholder}
             type='text'
-            value=""
+            // value=""
             onChange={()=>{}}
             />
 
