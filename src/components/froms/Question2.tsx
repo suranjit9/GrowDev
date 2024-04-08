@@ -24,11 +24,11 @@ import { usePathname, useRouter } from 'next/navigation';
 // import { QuestionSchema } from '@/lib/validations';
 
 const type = 'create';
-interface props{
+interface Props{
     mongoUserid:string;
 }
 
-const Question2 = ({mongoUserid}:props) => {
+const Question2 = ({mongoUserid}:Props) => {
     console.log(mongoUserid)
     const editorRef = useRef(null);
     const [isSubmitting, setSubmitting] = React.useState(false)
@@ -82,12 +82,12 @@ const Question2 = ({mongoUserid}:props) => {
     async function onSubmit(values:any) {
         setSubmitting(true);
         try {
-            console.log(values);
+            // console.log({values.title, values.explanation,values.tags});
             await createQuestion({
                 title: values.title,
-                explanation: values.explanation,
+                content: values.explanation,
                 tags: values.tags,
-                author: mongoUserid,
+                author: JSON.parse(mongoUserid),
             });
             router.push('/')
             

@@ -26,15 +26,21 @@ export const getTimeStamp = (createdAt: Date): string => {
   }
 };
 
-export const formatAndDivideNumber = (number: number): string => {
-  if (number >= 1000000) {
-    const formattedNumber = (number / 1000000).toFixed(1);
-    return `${formattedNumber}M`;
-  }else if (number >= 1000) {
-    const formattedNumber = (number / 1000).toFixed(1);
-    return `${formattedNumber}K`;
-  }else {
-    return number.toString();
+export const formatAndDivideNumber = (number?: number): string => {
+  if (typeof number === 'number') {
+    if (number >= 1000000) {
+      const formattedNumber = (number / 1000000).toFixed(1);
+      return `${formattedNumber}M`;
+    } else if (number >= 1000) {
+      const formattedNumber = (number / 1000).toFixed(1);
+      return `${formattedNumber}K`;
+    } else {
+      return number.toString();
+    }
+  } else {
+    return "0"; // Or any other default value or message you prefer
   }
 };
+
+
 

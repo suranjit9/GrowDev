@@ -5,78 +5,14 @@ import NoResult from "@/components/shared/NoResult/NoResult";
 import LocalSearch from "@/components/shared/search/LocalSearch";
 import { Button } from "@/components/ui/button";
 import { HomePageFilters } from "@/constants/Filters";
+import { getQuestions } from "@/lib/action/question.action";
 import { UserButton } from "@clerk/nextjs";
 import Link from "next/link";
 
-const questions = [
-  {
-    _id: "1",
-    title: "Sample Title jhfsa aijojgia iagjioaga nnagina ninaoig a",
-    tags: [
-        {
-            _id: "tag1",
-            name: "Tag 1"
-        },
-        {
-            _id: "tag2",
-            name: "Tag 2"
-        }
-    ],
-    author: {
-        _id: "author1",
-        name: "John Doe",
-        image: "author_image.jpg"
-    },
-    upvotes: 100000000,
-    view: 10000,
-    answers: [
-        {
-            answer_id: "answer1",
-            answer_text: "Sample answer 1"
-        },
-        {
-            answer_id: "answer2",
-            answer_text: "Sample answer 2"
-        }
-    ],
-    createdAt:new Date ("2024-04-02T12:00:00Z")
-},
-  {
-    _id: "1e",
-    title: "Sample Title",
-    tags: [
-        {
-            _id: "tag1e",
-            name: "Tag 1"
-        },
-        {
-            _id: "tag2e",
-            name: "Tag 2"
-        }
-    ],
-    author: {
-        _id: "author11",
-        name: "John Doe",
-        image: "author_image.jpg"
-    },
-    upvotes: 110,
-    view: 1020,
-    answers: [
-        {
-            answer_id: "answer11",
-            answer_text: "Sample answer 1"
-        },
-        {
-            answer_id: "answer21",
-            answer_text: "Sample answer 2"
-        }
-    ],
-    createdAt:new Date ("2024-04-02T12:00:00Z")
-}
 
-];
-
-export default function Home() {
+export default async function Home() {
+  const result = await getQuestions({});
+  console.log(result.length >0)
   return (
     <div className="h-screen pt-20 pl-3 pr-2">
       <div className="flex flex-col-reverse justify-between gap-4 sm:flex-row sm:items-center">
@@ -103,8 +39,8 @@ export default function Home() {
       </div>
       <HomeFilter />
       <div className="mt-8 flex flex-col gap-4">
-        {questions.length > 0
-          ? questions.map((qus) => {
+        {result.length > 0
+          ? result.map((qus) => {
               return <QuestionCard 
               key={qus._id}
               _id={qus._id}

@@ -26,13 +26,13 @@ const LeftSideBar = () => {
                   : `font-medium text-dark-100 dark:text-light-900`
               } flex items-center justify-center gap-4`}
             >
-              <Image
+              {/* <Image
                 src={item.imgURL}
                 alt={item.label}
                 width={20}
                 height={20}
                 loading="lazy"
-              />
+              /> */}
 
               <p>{item.label}</p>
             </Link>

@@ -1,9 +1,9 @@
-"Use server"
+"use server"
 
 import { connectToDatabase } from "@/database/mongoose"
 import User from "@/database/user.model";
 
-export const getUserId=async(params:any)=>{
+export const getUserById = async(params:any)=>{
     try {
         connectToDatabase();
         const {userId} = params;
@@ -11,5 +11,6 @@ export const getUserId=async(params:any)=>{
         return user;
     } catch (error) {
         console.log(error)
+        throw error
     }
 }

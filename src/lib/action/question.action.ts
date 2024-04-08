@@ -3,9 +3,24 @@
 import { connectToDatabase } from "@/database/mongoose"
 import Question from "@/database/question.model";
 import Tag from "@/database/tag.model";
+import { CreateQuestionParams, GetQuestionsParams } from "./shared.types";
+import User from "@/database/user.model";
+
+export const getQuestions = async(params:GetQuestionsParams)=>{
+    try {
+        connectToDatabase();
+        const questions = await Question.find({})
+        .populate({path: "tags", model:Tag})
+        .populate({path: "author", model:User})
+        return questions;
+    } catch (error) {
+        console.log(error)
+        throw error
+    }
+}
 
 
-export const createQuestion = async(params:any)=>{
+export const createQuestion = async(params:CreateQuestionParams)=>{
     try {
         connectToDatabase();
         // create a question in the database
@@ -14,36 +29,32 @@ export const createQuestion = async(params:any)=>{
         const question = await Question.create({
             title,
             content,
-            author,
-            tags,
-            path
+            author
+            
         })
         // add tags to the question & update the question
         const tagDocument = [];
        
         
         for (const tag of tags) {
+            console.log("Tag:", tag); // Add this line for debugging
+            if (typeof tag !== 'string' || tag.trim() === '') {
+                console.log("Invalid tag:", tag);
+                continue; // Skip invalid tags
+            }
             const existingTag = await Tag.findOneAndUpdate(
-                {
-                    name: {$regex: new RegExp(`^${tag}$`, "i")}
-                },
-                {
-                    $setonInsert: {
-                        name: tag
-                    },$push: {
-                        question: question._id
-                    }
-                },
-                {upsert: true, new: true}
+                { name: {$regex: new RegExp(`^${tag}$`, 'i')} },
+                {$setOnInsert:{name:tag}, $push: {question: question._id}},
+                { upsert: true, new: true }
             )
-            tagDocument.push(existingTag._id)
+              tagDocument.push(existingTag._id)  
         
     } 
-    await question.updateOne(question._id, {
-        $push: {
-            tags: {$each: tagDocument}
-        }
-    })
+    await Question.findByIdAndUpdate(
+        question._id,
+        {$push:{tags:{$each:tagDocument}}}
+    )
+    
 
     } catch (error) {
        console.log(error) 
