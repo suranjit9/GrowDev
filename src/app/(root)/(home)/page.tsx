@@ -1,3 +1,4 @@
+import { getQuestions } from "@/app/api/askQuestion/route";
 import QuestionCard from "@/components/Cards/QuestionCard";
 import HomeFilter from "@/components/Home/HomeFilter";
 import Filter from "@/components/shared/Filter/Filter";
@@ -5,7 +6,7 @@ import NoResult from "@/components/shared/NoResult/NoResult";
 import LocalSearch from "@/components/shared/search/LocalSearch";
 import { Button } from "@/components/ui/button";
 import { HomePageFilters } from "@/constants/Filters";
-import { getQuestions } from "@/lib/action/question.action";
+// import { getQuestions } from "@/lib/action/question.action";
 import { UserButton } from "@clerk/nextjs";
 import Link from "next/link";
 

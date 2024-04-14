@@ -10,7 +10,7 @@ import sitelogo from "@/assets/icon.png";
 const LeftSideBar = () => {
   const pathname = usePathname();
   return (
-    <section className=" left-0 dark:bg-[#151821] top-0 flex flex-col justify-between h-screen overflow-y-auto pt-20 lg:w-[266px] max-sm:hidden">
+    <section className=" left-0  dark:bg-[#151821] top-0 flex flex-col justify-between h-screen overflow-y-auto pt-20 lg:w-[266px] max-sm:hidden">
       <div className="flex flex-1 flex-col px-2 py-2 gap-6">
         {sidebarLinks.map((item) => {
           const isactive =

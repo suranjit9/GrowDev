@@ -1,10 +1,11 @@
-"use server"
+
 
 import { connectToDatabase } from "@/database/mongoose"
 import Question from "@/database/question.model";
 import Tag from "@/database/tag.model";
-import { CreateQuestionParams, GetQuestionsParams } from "./shared.types";
+
 import User from "@/database/user.model";
+import { CreateQuestionParams, GetQuestionsParams } from "@/lib/action/shared.types";
 import { revalidatePath } from "next/cache";
 
 
@@ -40,9 +41,9 @@ export const createQuestion = async(params:CreateQuestionParams)=>{
        
         
         for (const tag of tags) {
-            // console.log("Tag:", tag); // Add this line for debugging
+            console.log("Tag:", tag); // Add this line for debugging
             if (typeof tag !== 'string' || tag.trim() === '') {
-                // console.log("Invalid tag:", tag);
+                console.log("Invalid tag:", tag);
                 continue; // Skip invalid tags
             }
             const existingTag = await Tag.findOneAndUpdate(
