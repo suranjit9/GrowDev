@@ -37,8 +37,7 @@ export const createQuestion = async(params:CreateQuestionParams)=>{
         })
         // add tags to the question & update the question
         const tagDocument = [];
-       
-        
+
         for (const tag of tags) {
             // console.log("Tag:", tag); // Add this line for debugging
             if (typeof tag !== 'string' || tag.trim() === '') {

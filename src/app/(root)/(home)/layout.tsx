@@ -7,12 +7,17 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
   return (
     <main className="">
       <NavBar />
-      <div className="flex ">
-        <LeftSideBar />
-        <section className="flex min-h-screen flex-1 flex-col">
+      <div className="flex flex-row">
+       <div className="basis-1/2">
+       <LeftSideBar />
+       </div>
+        <section className="flex min-h-screen basis-1/2 flex-col">
           <div className="mx-auto w-full max-w-5xl">{children}</div>
         </section>
-        <RightSideBar/>
+        <div className="basis-1/2">
+       <LeftSideBar />
+       </div>
+
       </div>
     </main>
   );

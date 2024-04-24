@@ -5,12 +5,12 @@ import { SignedOut } from "@clerk/nextjs";
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import sitelogo from "@/assets/icon.png";
+import sitelogo from "@/icon.png";
 
 const LeftSideBar = () => {
   const pathname = usePathname();
   return (
-    <section className=" left-0  dark:bg-[#151821] top-0 flex flex-col justify-between h-screen overflow-y-auto pt-20 lg:w-[266px] max-sm:hidden">
+    <section className=" left-0  dark:bg-[#151821] top-0 flex flex-col shadow-lg justify-between h-screen fixed w-[266px] overflow-y-auto pt-20 lg:w-[266px] max-sm:hidden">
       <div className="flex flex-1 flex-col px-2 py-2 gap-6">
         {sidebarLinks.map((item) => {
           const isactive =
@@ -26,13 +26,13 @@ const LeftSideBar = () => {
                   : `font-medium text-dark-100 dark:text-light-900`
               } flex items-center justify-center gap-4`}
             >
-              {/* <Image
+              <Image
                 src={item.imgURL}
                 alt={item.label}
                 width={20}
                 height={20}
                 loading="lazy"
-              /> */}
+              />
 
               <p>{item.label}</p>
             </Link>
