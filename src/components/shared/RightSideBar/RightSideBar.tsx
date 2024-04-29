@@ -54,7 +54,7 @@ const populerTag = [
 ];
 const RightSideBar = () => {
   return (
-    <section className="right-0 dark:bg-[#151821] fixed  top-0 flex flex-col  h-screen overflow-y-auto  pt-20 p-2 lg:w-[350px] max-xl:hidden">
+    <section className="right-0 dark:bg-[#151821] flex flex-col  fixed  h-screen overflow-y-auto  pt-20 p-2 lg:w-[350px] max-xl:hidden">
       <div className="pt-2 p-4">
         <h3 className="text-xl font-bold">Top Questions</h3>
         <div className="mt-7 flex w-full flex-col gap-6">

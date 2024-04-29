@@ -13,7 +13,7 @@ import Link from "next/link";
 export default async function Home() {
   const result = await getQuestions({});
   return (
-    <div className="h-screen pt-24 pl-12 pr-24">
+    <div className="h-screen pt-24 w-full pl-12 pr-2">
       <div className="flex flex-col-reverse justify-between gap-4 sm:flex-row sm:items-center">
         <h1 className="text-xl font-bold">All Questions</h1>
         <Link href={"/ask-question"} className="flex justify-end max-sm:w-full">
