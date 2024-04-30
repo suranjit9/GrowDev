@@ -1,5 +1,5 @@
 // import Question from '@/components/froms/Question';
-import Question2 from '@/components/froms/Question';
+import Question2 from '@/components/froms/Question2';
 import { getUserById } from '@/lib/action/user.action';
 import { auth } from '@clerk/nextjs';
 import { redirect } from 'next/navigation';

@@ -15,7 +15,13 @@ export interface CreateQuestionParams {
     tags: string[]; 
     path:string
 }
-
+// export interface CreateQuestionParams {
+// title: string;
+// content: string;
+// tags: string[];
+// explanation: string;
+// author: string;
+// path: string;}
 export interface CreateAnswerParams {
 content: string;
 author: string; // User ID

@@ -1,5 +1,5 @@
 import { BADGE_CRITERIA } from "@/types";
-import { SidebarLink } from "@/types";
+
 // export interface SidebarLink {
 //     imgURL: string;
 //     route: string;

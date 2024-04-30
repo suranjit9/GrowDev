@@ -1,4 +1,4 @@
-import { SidebarLink } from "@/types/index";
+
 // type SidebarLinks = SidebarLink[];
 
    export const BADGE_CRITERIA = {
