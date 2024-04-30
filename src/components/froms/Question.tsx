@@ -28,7 +28,7 @@ interface Props {
   mongoUserid: string;
 }
 
-const Question2 = ({ mongoUserid }: Props) => {
+const Question = ({ mongoUserid }: Props) => {
   console.log(mongoUserid);
   const editorRef = useRef(null);
   const [isSubmitting, setSubmitting] = React.useState(false);
@@ -236,4 +236,4 @@ const Question2 = ({ mongoUserid }: Props) => {
   );
 };
 
-export default Question2;
+export default Question;
