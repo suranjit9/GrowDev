@@ -56,30 +56,40 @@ const Question2 = ({ mongoUserid }: Props) => {
   };
 
   const handleInputKeyDown = (
-    e: React.KeyboardEvent<HTMLInputElement>,
-    field: any
+    e: React.KeyboardEvent<HTMLInputElement> | null,
+    field: any | null
   ) => {
+    if (!e || !field) {
+      return;
+    }
+
     if (e.key === "Enter" && field.name === "tags") {
       e.preventDefault();
-      const tagInput = e.target as HTMLInputElement;
+      const tagInput = e.target as HTMLInputElement | null;
+      if (!tagInput) {
+        return;
+      }
+
       const tagValue = tagInput.value.trim();
-      if (tagValue !== "") {
-        if (tagValue.length > 15) {
-          form.setError("tags", {
-            type: "required",
-            message: "Tag must be less than 15 characters.",
-          });
-        } else {
-          const updatedTags = [...field.value, tagValue];
-          field.onChange(updatedTags); // Update form value
-          tagInput.value = ""; // Clear input field
-          form.clearErrors("tags");
-        }
-      } else {
+      if (!tagValue) {
         form.trigger();
+        return;
+      }
+
+      if (tagValue.length > 15) {
+        form.setError("tags", {
+          type: "required",
+          message: "Tag must be less than 15 characters.",
+        });
+      } else {
+        const updatedTags = [...field.value, tagValue];
+        field.onChange(updatedTags); // Update form value
+        tagInput.value = ""; // Clear input field
+        form.clearErrors("tags");
       }
     }
   };
+
 
   async function onSubmit(values: any) {
     setSubmitting(true);
