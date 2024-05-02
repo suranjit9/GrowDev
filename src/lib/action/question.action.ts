@@ -23,43 +23,55 @@ export const getQuestions = async(params:GetQuestionsParams)=>{
 }
 
 
-export const createQuestion = async(params:CreateQuestionParams)=>{
+export const createQuestion = async(params:CreateQuestionParams):Promise<any>=>{
     try {
         connectToDatabase();
         // create a question in the database
         const { title, content, author, tags, path } = params;
-    // create a question in the database 
+        if (!title || !content || !author || !tags || !path) {
+            throw new Error("Invalid parameters")
+        }
+
         const question = await Question.create({
             title,
             content,
             author
-            
-        })
+        });
+        if (!question) {
+            throw new Error("Failed to create question");
+        }
+
         // add tags to the question & update the question
         const tagDocument = [];
-
         for (const tag of tags) {
-            // console.log("Tag:", tag); // Add this line for debugging
             if (typeof tag !== 'string' || tag.trim() === '') {
-                // console.log("Invalid tag:", tag);
                 continue; // Skip invalid tags
             }
             const existingTag = await Tag.findOneAndUpdate(
                 { name: {$regex: new RegExp(`^${tag}$`, 'i')} },
                 {$setOnInsert:{name:tag}, $push: {question: question._id}},
                 { upsert: true, new: true }
-            )
-              tagDocument.push(existingTag._id)  
-        
-    } 
-    await Question.findByIdAndUpdate(
-        question._id,
-        {$push:{tags:{$each:tagDocument}}}
-    ); 
-    // don't relode the page after creating a question
-    revalidatePath(path);
+            );
+            if (!existingTag) {
+                throw new Error("Failed to find or create tag")
+            }
+            tagDocument.push(existingTag._id)
+        }
+        if (tagDocument.length === 0) {
+            throw new Error("No valid tags to add")
+        }
+
+        await Question.findByIdAndUpdate(
+            question._id,
+            {$push:{tags:{$each:tagDocument}}},
+            { new: true }
+        );
+
+        // don't relode the page after creating a question
+        revalidatePath(path);
 
     } catch (error) {
-       console.log(error) 
+        console.error(error)
+        throw error
     }
 }
