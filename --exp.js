@@ -1,1 +1,0 @@
-export const createQuestion = async(params:CreateQuestionParams)=>{

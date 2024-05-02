@@ -84,14 +84,38 @@ const Question2 = ({ mongoUserid }: Props) => {
   async function onSubmit(values: any) {
     setSubmitting(true);
     try {
-      // console.log({values.title, values.explanation,values.tags});
+      if (!values) {
+        throw new Error("values is null");
+      }
+      if (!values.title) {
+        throw new Error("values.title is null");
+      }
+      if (!values.explanation) {
+        throw new Error("values.explanation is null");
+      }
+      if (!values.tags) {
+        throw new Error("values.tags is null");
+      }
+      if (!mongoUserid) {
+        throw new Error("mongoUserid is null");
+      }
+      const parsedUserId = JSON.parse(mongoUserid);
+      if (!parsedUserId) {
+        throw new Error("JSON.parse(mongoUserid) is null");
+      }
+      if (!pathname) {
+        throw new Error("pathname is null");
+      }
       await createQuestion({
         title: values.title,
         content: values.explanation,
         tags: values.tags,
-        author: JSON.parse(mongoUserid),
+        author: parsedUserId,
         path: pathname,
       });
+      if (!router) {
+        throw new Error("router is null");
+      }
       router.push("/");
     } catch (error) {
       console.error(error);
